@@ -32,9 +32,9 @@ Single-project library layout per plan.md:
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create project structure per plan.md: `src/adls_sas_file_manager/` (with `_internal/` subpackage), `tests/unit/`, `tests/integration/`
-- [ ] T002 Initialize the Python 3.13 project with `pyproject.toml` declaring runtime dependencies `azure-storage-file-datalake`, `azure-keyvault-secrets`, `azure-identity` and dev dependency `pytest`, per research.md
-- [ ] T003 [P] Configure VS Code workspace settings in `.vscode/settings.json` to select the Python 3.13 interpreter and enable pytest test discovery, per quickstart.md
+- [X] T001 Create project structure per plan.md: `src/adls_sas_file_manager/` (with `_internal/` subpackage), `tests/unit/`, `tests/integration/`
+- [X] T002 Initialize the Python 3.13 project with `pyproject.toml` declaring runtime dependencies `azure-storage-file-datalake`, `azure-keyvault-secrets`, `azure-identity` and dev dependency `pytest`, per research.md
+- [X] T003 [P] Configure VS Code workspace settings in `.vscode/settings.json` to select the Python 3.13 interpreter and enable pytest test discovery, per quickstart.md
 
 ---
 
@@ -44,12 +44,12 @@ Single-project library layout per plan.md:
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 Create the exception hierarchy (`AdlsSasFileManagerError`, `ConfigurationError`, `SecretRetrievalError`, `AuthorizationError`, `PathNotFoundError`, `StorageOperationError`) in `src/adls_sas_file_manager/errors.py`, per contracts/adls_sas_file_manager.md
-- [ ] T005 [P] Create `StorageConnectionConfig` in `src/adls_sas_file_manager/config.py` implementing the data-model.md validation rules: `account_name` MUST be non-empty; either `sas_token` OR both `key_vault_url` and `key_vault_secret_name` MUST be provided, else raise `ConfigurationError`
-- [ ] T006 [P] Implement SAS token resolution in `src/adls_sas_file_manager/_internal/secret_resolver.py`: use `azure.identity.DefaultAzureCredential` + `azure.keyvault.secrets.SecretClient.get_secret` to retrieve the SAS token when `sas_token` is not supplied directly, wrapping any Key Vault failure as `SecretRetrievalError` without including the secret name/value or vault URL contents in the error message (FR-013)
-- [ ] T007 Create `AdlsSasFileManager.__init__` in `src/adls_sas_file_manager/client.py`: validate config via T005, resolve the SAS token via T006, and construct the `azure.storage.filedatalake.DataLakeServiceClient` using `https://{account_name}.dfs.core.windows.net` and the resolved SAS token as credential
-- [ ] T008 Create `src/adls_sas_file_manager/__init__.py` exporting `AdlsSasFileManager` and all exception types from T004
-- [ ] T009 [P] Create shared pytest fixtures in `tests/unit/conftest.py` that provide a mocked `DataLakeServiceClient` (and its `FileSystemClient`/`DataLakeDirectoryClient`/`DataLakeFileClient`) so unit tests never contact real Azure services
+- [X] T004 Create the exception hierarchy (`AdlsSasFileManagerError`, `ConfigurationError`, `SecretRetrievalError`, `AuthorizationError`, `PathNotFoundError`, `StorageOperationError`) in `src/adls_sas_file_manager/errors.py`, per contracts/adls_sas_file_manager.md
+- [X] T005 [P] Create `StorageConnectionConfig` in `src/adls_sas_file_manager/config.py` implementing the data-model.md validation rules: `account_name` MUST be non-empty; either `sas_token` OR both `key_vault_url` and `key_vault_secret_name` MUST be provided, else raise `ConfigurationError`
+- [X] T006 [P] Implement SAS token resolution in `src/adls_sas_file_manager/_internal/secret_resolver.py`: use `azure.identity.DefaultAzureCredential` + `azure.keyvault.secrets.SecretClient.get_secret` to retrieve the SAS token when `sas_token` is not supplied directly, wrapping any Key Vault failure as `SecretRetrievalError` without including the secret name/value or vault URL contents in the error message (FR-013)
+- [X] T007 Create `AdlsSasFileManager.__init__` in `src/adls_sas_file_manager/client.py`: validate config via T005, resolve the SAS token via T006, and construct the `azure.storage.filedatalake.DataLakeServiceClient` using `https://{account_name}.dfs.core.windows.net` and the resolved SAS token as credential
+- [X] T008 Create `src/adls_sas_file_manager/__init__.py` exporting `AdlsSasFileManager` and all exception types from T004
+- [X] T009 [P] Create shared pytest fixtures in `tests/unit/conftest.py` that provide a mocked `DataLakeServiceClient` (and its `FileSystemClient`/`DataLakeDirectoryClient`/`DataLakeFileClient`) so unit tests never contact real Azure services
 
 **Checkpoint**: Foundation ready - user story implementation can now begin
 

@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adls-sas-file-manager"
+version = "0.1.0"
+description = "Manage directories and files in an Azure Data Lake Storage (ADLS) Gen2 account using SAS token authorization, with secrets sourced from Azure Key Vault."
+readme = "README.md"
+requires-python = ">=3.13"
+license = { text = "MIT" }
+dependencies = [
+    "azure-storage-file-datalake>=12.25.0",
+    "azure-keyvault-secrets>=4.11.2",
+    "azure-identity>=1.19.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "integration: tests requiring live Azure Key Vault and ADLS Gen2 credentials",
+]

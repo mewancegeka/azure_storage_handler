@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.env
+.env*
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+
+# OS
+.DS_Store
+Thumbs.db
