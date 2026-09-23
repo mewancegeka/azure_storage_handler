@@ -6,7 +6,7 @@
 
 **Status**: Draft
 
-**Input**: User description: "Create a Python class, which can be included as a library to another project, where the class manages directories and files in an ADLS storage account. It should use SAS Token method for authorization. All secrets must be fetched from Azure Key Vault. Key vault settings can be passed as parameters. Use the link https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-directory-file-acl-python?tabs=sas-token as a reference."
+**Input**: User description: "Create a Python class, which can be included as a library to another project, where the class manages directories and files in an ADLS storage account. The developer will mainly pass JSON payload to be saved as JSON files in the given directory path. It should use SAS Token method for authorization. All secrets must be fetched from Azure Key Vault. Key vault settings can be passed as parameters. Use the link https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-directory-file-acl-python?tabs=sas-token as a reference."
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -27,22 +27,19 @@ operations, and verifying the resulting state in the storage account.
 **Acceptance Scenarios**:
 
 1. **Given** a valid SAS token and storage account name, **When** the developer asks the library to
-   create a directory in a file system, **Then** the directory exists in the target file system.
+   create a directory in a file system, **Then** the directory will be created if it is not exists in the target file system.
 2. **Given** an existing directory with files, **When** the developer asks the library to list its
    contents, **Then** the library returns the names of the contained files and subdirectories.
-3. **Given** an existing directory, **When** the developer asks the library to rename/move it,
-   **Then** the directory appears at the new path and no longer exists at the old path.
-4. **Given** an existing directory, **When** the developer asks the library to delete it,
-   **Then** the directory and its contents no longer exist in the file system.
-5. **Given** a local file, **When** the developer asks the library to upload it to a directory,
+3. **Given** a local file, **When** the developer asks the library to upload it to a directory,
    **Then** the file exists in that directory with the same content.
-6. **Given** a file in a directory, **When** the developer asks the library to download it,
+4. **Given** a file in a directory, **When** the developer asks the library to download it,
    **Then** the local copy matches the remote file's content byte-for-byte.
-7. **Given** an existing file, **When** the developer asks the library to append data to it,
+5. **Given** an existing file, **When** the developer asks the library to append data to it,
    **Then** the file's content reflects the original content followed by the appended data.
-8. **Given** an existing file, **When** the developer asks the library to delete it,
+6. **Given** an existing file, **When** the developer asks the library to delete it,
    **Then** the file no longer exists in the directory.
-
+7. **Given** a directory path eg.source_name/year/month/day/ and a JSON payload, the JSON data must be saved as JSON files in the child directory.
+   
 ---
 
 ### User Story 2 - Authorize storage access using a SAS token retrieved from Azure Key Vault (Priority: P1)
